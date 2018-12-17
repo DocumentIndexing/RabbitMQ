@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.g4pas.index.document.publish</groupId>
     <artifactId>rabbitmq</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <packaging>pom</packaging>
     <build>
         <plugins>
@@ -78,7 +78,7 @@
     <scm>
         <connection>scm:git:git://github.com:DocumentIndexing/RabbitMQ.git</connection>
         <developerConnection>scm:git:git@github.com:DocumentIndexing/RabbitMQ.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>rabbitmq-0.0.3</tag>
     </scm>
     <distributionManagement>
         <repository>
