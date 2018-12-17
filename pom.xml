@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.g4pas.index.document.publish</groupId>
+    <artifactId>rabbitmq</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.26.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>image-push</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <!--<configuration>-->
+                            <!--<pushRegistry>docker.io:5000</pushRegistry>-->
+                        <!--</configuration>-->
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <verbose>true</verbose>
+                    <images>
+                        <image>
+                            <name>guidof/documentindexer-rabbitmq:%l</name>
+                            <build>
+                                <dockerFileDir>.</dockerFileDir>
+                                <assembly>
+                                    <inline>
+                                        <fileSets>
+                                            <fileSet>
+                                                <directory>src/main/resources/rabbitmq/conf</directory>
+                                                <outputDirectory>/etc/rabbitmq</outputDirectory>
+                                            </fileSet>
+
+                                            <fileSet>
+                                                <directory>src/main/resources/rabbitmq/scripts</directory>
+                                                <outputDirectory>/scripts</outputDirectory>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inline>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <repository>
+            <id>Tracer-Release-Nexus</id>
+            <name>Tracer Release Nexus</name>
+            <url>http://192.168.1.3:8081/repository/tracer-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>Trace-Snapshot-Nexus</id>
+            <name>Tracer Snapshot Nexus</name>
+            <url>http://192.168.1.3:8081/repository/tracer-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
