@@ -35,7 +35,7 @@
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <name>guidof/documentindexer-rabbitmq:%l</name>
+                            <name>documentindexer-rabbitmq:%l</name>
                             <build>
                                 <tags>
                                     <tag>${project.version}</tag>
