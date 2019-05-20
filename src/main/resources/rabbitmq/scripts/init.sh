@@ -22,7 +22,7 @@
         echo "Adding User ${PUBLISHER_USER} as publisher";\
         rabbitmqctl add_user $PUBLISHER_USER $(< ${PUBLISHER_PASS_FILE})  ; \
         rabbitmqctl set_user_tags $PUBLISHER_USER administrator ; \
-        rabbitmqctl set_permissions -p indexing $PUBLISHER_USER  "" "indexDocument" ""   ; \
+        rabbitmqctl set_permissions -p indexing $PUBLISHER_USER  "" "(indexDocument|amq.default)" "" ; \
 
         echo "Removing the permissions" ;\
 
